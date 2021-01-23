@@ -1,41 +1,79 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <i class="fas fa-link"></i> Favorite Links
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        {{#if user}}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-          Links
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    
+    <ul class="navbar-nav fa-pull-right">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block ">
+        <a href="index3.html" class="nav-link">Login</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block ">
+        <a href="#" class="nav-link">Cerrar</a>
+      </li>
+    </ul>
+
+ 
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/links">All Links</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/links/add">Add A Link</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li>
-        {{else}}
-        <li class="nav-item">
-          <a class="nav-link" href="/signin">SignIn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup">SignUp</a>
-        </li>
-        {{/if}}
-      </ul>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="index3.html" class="brand-link">
+      
+      <span class="brand-text font-weight-light">Jovida</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Simple Link
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-  </div>
-</nav>
+    <!-- /.sidebar -->
+  </aside>
