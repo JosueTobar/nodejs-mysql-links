@@ -5,14 +5,19 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+
+      {{#if user}}
       <li class="nav-item d-none d-sm-inline-block ">
-        <a href="index3.html" class="nav-link">Login</a>
+        <a href="/logout" class="nav-link">Cerrar</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block ">
-        <a href="#" class="nav-link">Cerrar</a>
-      </li>
+       {{else}} 
+        <li class="nav-item d-none d-sm-inline-block ">
+          <a href="/signin" class="nav-link">Login</a>
+        </li>
+      {{/if}}
     </ul>
     <!-- Right navbar links -->
+     {{#if user}}
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
@@ -42,6 +47,7 @@
         </div>
       </li>
     </ul>
+    {{/if}}
   </nav>
   <!-- /.navbar -->
   <!-- Main Sidebar Container -->
