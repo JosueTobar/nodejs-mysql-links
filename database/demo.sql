@@ -1,11 +1,10 @@
 drop database demo;
-create database  demo ;
-USE `demo` ;
-
+create database  inventario ;
+USE `inventario` ;
 -- -----------------------------------------------------
 -- Table `demo`.`menu`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `demo`.`menu` (
+CREATE TABLE IF NOT EXISTS `menu` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NULL DEFAULT NULL,
   `estado` VARCHAR(1) NULL DEFAULT NULL,
@@ -19,7 +18,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `demo`.`roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `demo`.`roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NOMBRE` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`))
@@ -27,11 +26,10 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
-
 -- -----------------------------------------------------
 -- Table `demo`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `demo`.`users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL,
   `password` VARCHAR(60) NOT NULL,
@@ -40,16 +38,29 @@ CREATE TABLE IF NOT EXISTS `demo`.`users` (
   PRIMARY KEY (`id`),
   CONSTRAINT `users_ibfk_1`
     FOREIGN KEY (`idrol`)
-    REFERENCES `demo`.`roles` (`ID`))
+    REFERENCES `roles` (`ID`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
+INSERT INTO `inventario`.`users` (`id`, `username`, `password`, `fullname`, `idrol`) VALUES ('1', 'Admin', 'admin1234', 'Josue Tobar', '1');
+INSERT INTO `inventario`.`users` (`id`, `username`, `password`, `fullname`, `idrol`) VALUES ('2', 'Estandar', 'estandar1234', 'Usuario Estandar', '2');
 
+-- -----------------------------------------------------
+-- Table `demo`.`LINKS`
+-- -----------------------------------------------------
+CREATE TABLE links (
+  id INT(11) NOT NULL,
+  title VARCHAR(150) NOT NULL,
+  url VARCHAR(255) NOT NULL,
+  description TEXT,
+  user_id INT(11),
+  created_at timestamp NOT NULL DEFAULT current_timestamp,
+  CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id)
+);
 
 -- -----------------------------------------------------
 -- Table `demo`.`submenu`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `demo`.`submenu` (
+CREATE TABLE IF NOT EXISTS `submenu` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `url` VARCHAR(45) NULL,
@@ -58,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `demo`.`submenu` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_submenu_menu1`
     FOREIGN KEY (`idMenu`)
-    REFERENCES `demo`.`menu` (`id`)
+    REFERENCES `menu` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -78,26 +89,27 @@ CREATE TABLE IF NOT EXISTS `demo`.`rol_menu` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_rol_menu_submenu1`
     FOREIGN KEY (`idsubmenu`)
-    REFERENCES `demo`.`submenu` (`id`)
+    REFERENCES `submenu` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 USE `demo` ;
 -- INSERT MENU
-INSERT INTO `demo`.`menu` (`nombre`, `estado`, `logo`) VALUES ('mantenimiento', 'A', 'logo');
-INSERT INTO `demo`.`menu` (`nombre`, `estado`, `logo`) VALUES ('reportes', 'A', 'LOGO');
+	INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('BODEGA GENERAL', 'A', 'logo');
+	INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('INVENTARIO GENERAL', 'A', 'LOGO');
+    INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('REPORTES', 'A', 'LOGO');
 
 SELECT * FROM MENU;
 
 -- INSERT SUB MENU
 
 -- INSERT ROL 
-INSERT INTO `demo`.`roles` (`ID`, `NOMBRE`) VALUES ('1', 'ADMIN');
-INSERT INTO `demo`.`roles` (`ID`, `NOMBRE`) VALUES ('2', 'ESTANDAR');
+INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES ('1', 'ADMIN');
+INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES ('2', 'ESTANDAR');
 
-INSERT INTO `demo`.`rol_menu` (`idrol_menu`, `roles_ID`, `idsubmenu`) VALUES ('2', '2', '3');
-INSERT INTO `demo`.`rol_menu` (`idrol_menu`, `roles_ID`, `idsubmenu`) VALUES ('3', '1', '2');
+INSERT INTO `rol_menu` (`idrol_menu`, `roles_ID`, `idsubmenu`) VALUES ('2', '2', '3');
+INSERT INTO `rol_menu` (`idrol_menu`, `roles_ID`, `idsubmenu`) VALUES ('3', '1', '2');
 
 -- Select sub menu segun rol 
 	SELECT  *  FROM submenu s, rol_menu r 
