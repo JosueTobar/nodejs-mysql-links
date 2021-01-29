@@ -1,6 +1,6 @@
-CREATE DATABASE db_links;
-
-USE db_links;
+DROP DATABASE INVENTARIO;
+CREATE DATABASE inventario;
+USE inventario;
 
 -- TABLE USER
 -- all pasword wil be encrypted using SHA1

@@ -9,6 +9,7 @@
       {{#if user}}
       <li class="nav-item d-none d-sm-inline-block ">
         <a href="/logout" class="nav-link">Cerrar</a>
+         <input type="text" value={{user.id}} id="txtIdUser" hidden > </input>
       </li>
        {{else}} 
         <li class="nav-item d-none d-sm-inline-block ">
