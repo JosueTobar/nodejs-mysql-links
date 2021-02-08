@@ -1,5 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
+const multer = require('multer');             // *Subir imagenes 
+const { v4: uuidv4 } = require('uuid');       // *Generar ids unicos 
 const path = require('path');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
@@ -32,7 +34,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(session({
-  secret: 'faztmysqlnodemysql',
+  secret: uuidv4(),
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore(database)
