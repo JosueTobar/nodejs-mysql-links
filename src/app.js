@@ -21,6 +21,7 @@ require('./lib/passport');
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 app.use(corss()); 
+app.use(express.json());
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   layoutsDir: path.join(app.get('views'), 'layouts'),
@@ -34,7 +35,6 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 
 app.use(session({
   secret: uuidv4(),
@@ -72,8 +72,8 @@ app.use(require('./routes/auth.routes'));
 app.use(require('./routes/user.routes'));
 app.use(require('./routes/menu.routes'));
 app.use('/links', require('./routes/links.routes'));
+app.use(require('./routes/producto'));
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
-
 module.exports = app;

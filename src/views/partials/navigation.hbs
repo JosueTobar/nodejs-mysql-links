@@ -1,72 +1,116 @@
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav fa-pull-right">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav fa-pull-right">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
 
-      {{#if user}}
-      <li class="nav-item d-none d-sm-inline-block ">
-        <a href="/logout" class="nav-link">Cerrar</a>
-         <input type="text" value={{user.id}} id="txtIdUser" hidden > </input>
-      </li>
-       {{else}} 
-        <li class="nav-item d-none d-sm-inline-block ">
-          <a href="/signin" class="nav-link">Login</a>
-        </li>
-      {{/if}}
-    </ul>
-    <!-- Right navbar links -->
-     {{#if user}}
-    <ul class="navbar-nav ml-auto">
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">1</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-    
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">...</a>
-        </div>
-      </li>
-    </ul>
+    {{#if user}}
+    <li class="nav-item d-none d-sm-inline-block ">
+      <a href="/logout" class="nav-link">Cerrar</a>
+      <input type="text" value={{user.id}} id="txtIdUser" hidden> </input>
+    </li>
+    {{else}}
+    <li class="nav-item d-none d-sm-inline-block ">
+      <a href="/signin" class="nav-link">Login</a>
+    </li>
     {{/if}}
-  </nav>
-  <!-- /.navbar -->
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="index3.html" class="brand-link">
-      <span class="brand-text font-weight-light">Jovida</span>
-    </a>
+  </ul>
+  <!-- Right navbar links -->
+  {{#if user}}
+  <ul class="navbar-nav ml-auto">
+    <!-- Notifications Dropdown Menu -->
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="far fa-bell"></i>
+        <span class="badge badge-warning navbar-badge">1</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-header">Notifications</span>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item">
+          <i class="fas fa-envelope mr-2"></i> 4 new messages
+          <span class="float-right text-muted text-sm">3 mins</span>
+        </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item dropdown-footer">...</a>
+      </div>
+    </li>
+  </ul>
+  {{/if}}
+</nav>
+<!-- /.navbar -->
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <a href="/" class="brand-link">
+    <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">Jovida</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        {{#if user}}
+        <!-- MODULO INVENTARIO GENERAL -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link"> <i class="fas fa-cogs mr-2"></i></i> </i>
+            <p>Invenatario General <i class="fas fa-angle-left right "></i> </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/producto_list" class="nav-link">
+                <i class="fas fa-boxes mr-1 ml-1"></i>
+                <p>Productos</p>
+              </a>
+              <a href="zonas.html" class="nav-link">
+                <i class="fas fa-grip-horizontal mr-1 ml-1"></i>
+                <p>Entradas</p>
+              </a>
+              <a href="categoria.html" class="nav-link">
+                <i class="far fa-list-alt mr-1 ml-1"></i>
+                <p>Salidas</p>
+              </a>
+            </li>
+            <!-- SUB MODELUO DE MANTENIMIENTO -->
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link"> <i class="fas fa-cogs mr-2"></i></i> </i>
+                <p>Mantenimientos <i class="fas fa-angle-left right "></i> </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="bodegas.html" class="nav-link">
+                    <i class="fas fa-boxes mr-1 ml-1"></i>
+                    <p>Productos</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- FIN SUB MODELUO DE MANTENIMIENTO -->
+          </ul>
+        </li>
+        <!-- FIN MODULO INVENTARIO GENERAL -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link"> <i class="fas fa-boxes mr-2"></i></i> </i>
+            <p> Bodega General <i class="fas fa-angle-left right "></i> </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="bodegas.html" class="nav-link">
+                <i class="fas fa-boxes mr-1 ml-1"></i>
+                <p>Bodegas</p>
+              </a>
+              </a>
+            </li>
+          </ul>
+        </li>
+        {{/if}}
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
