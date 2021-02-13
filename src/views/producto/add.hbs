@@ -8,38 +8,27 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
+        <form action="/producto_add"   method="POST" enctype="multipart/form-data" >
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Minimal</label>
+                    <label>Select</label>
                     <select class="form-control select2" style="width: 100%;">
                         <option selected="selected">Alabama</option>
                         <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
                     </select>
                 </div>
              </div>
-            <!-- /.col -->
+        
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Multiple</label>
-                    <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                        <option>Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
-                    </select>
+                    <label class="" for="minimo">Imagen</label>
+                        <input type="file" class="form-control-file" name="img">
                 </div>
-            </div>
+             </div>
         </div>
-        <!-- /.row -->
+        <button type="submit" class="btn btn-primary"> Enviar </button>
+        </from>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
