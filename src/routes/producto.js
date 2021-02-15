@@ -21,14 +21,12 @@ router.get('/producto_edit', (req, res) => {
 });
 
 router.post('/producto_add', async (req, res) => {
-    console.log(req.file)
-    const filepath = Date.now()+req.file.filename.replace(/ /g, "")
+    const filepath = req.file.filename;
     const image = await Jimp.read(req.file.path)
     image.resize(50, 50) 
-    .quality(90)
-    .writeAsync(`../public/TEST/${filepath}`)
+    await image.writeAsync(`uploads/${filepath}`)
     res.json({
-        data: `![](http://localhost:4000/TEST/${filepath})`
+        data: `![](http://localhost:4000/uploads/${filepath})`
     })
 });
 module.exports = router;

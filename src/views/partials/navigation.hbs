@@ -44,8 +44,8 @@
 <!-- /.navbar -->
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <a href="/" class="brand-link">
-    <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+  <a href="/profile" class="brand-link">
+    <img src="http://localhost:4000/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">Jovida</span>
   </a>
 
@@ -93,6 +93,7 @@
           </ul>
         </li>
         <!-- FIN MODULO INVENTARIO GENERAL -->
+        <!-- MODULO BODEGA GENERAL -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link"> <i class="fas fa-boxes mr-2"></i></i> </i>
             <p> Bodega General <i class="fas fa-angle-left right "></i> </p>
@@ -107,6 +108,39 @@
             </li>
           </ul>
         </li>
+        <!-- FIN MODULO BODEGA GENERAL -->
+        <!-- MODULO BODEGA DE ACCESORIOS -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link"> <i class="fas fa-tools mr-2"></i></i> </i>
+            <p> Accesorios <i class="fas fa-angle-left right "></i> </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="bodegas.html" class="nav-link">
+                <i class="fas fa-boxes mr-1 ml-1"></i>
+                <p>Bodegas</p>
+              </a>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!--FIN  MODULO BODEGA DE ACCESORIOS -->
+        <!-- MODULO USUARIOS GENERAL -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link"> <i class="fas fa-users mr-2"></i></i> </i>
+            <p> Usuarios <i class="fas fa-angle-left right "></i> </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/user_list" class="nav-link">
+                <i class="fas fa-user mr-1 ml-1"></i>
+                <p>Usuario</p>
+              </a>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- FIN MODULO USUARIOS GENERAL -->
         {{/if}}
       </ul>
     </nav>

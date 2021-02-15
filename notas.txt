@@ -9,3 +9,9 @@ where r.idsubmenu = s.id
 and s.id = u.Idroles
 and s.idMenu = m.id
 and u.idUSUARIO = 1
+-----------------------------------------------------------------------------------------------------------
+                        RECORTAR IMAGENES CON MULTER Y GRADARLAS EN OTRO LUGAR 
+-----------------------------------------------------------------------------------------------------------
+https://dev.to/nahuelsegovia/subir-y-recortar-imagenes-con-expressjs-1pme
+https://blog.logrocket.com/image-processing-with-node-and-jimp/
+
