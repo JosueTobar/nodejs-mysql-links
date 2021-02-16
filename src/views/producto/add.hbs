@@ -8,27 +8,68 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="/producto_add"   method="POST" enctype="multipart/form-data" >
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Select</label>
-                    <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Alabama</option>
-                        <option>Alaska</option>
-                    </select>
+        <form action="/producto_add" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Nombre</label>
+                        <input type="text" class="form-control" name="nombre">
+                    </div>
                 </div>
-             </div>
-        
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="" for="minimo">Imagen</label>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Codigo</label>
+                        <input type="text" class="form-control" name="codigo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Minimo</label>
+                        <input type="number" class="form-control" name="minimo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Peso Neto</label>
+                        <input type="number" class="form-control" name="pesoneto">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Peso Bruto</label>
+                        <input type="number" class="form-control" name="pesobruto">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tipo Unidad</label>
+                        <select class="form-control select2" style="width: 100%;" name="">
+                            <option value="Unidades" selected="selected">Unidades</option>
+                            <option value="kilogramos">Kilogramos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="catidad">Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Descripción </label>
+                        <textarea class="form-control" name="descripcion" id="" cols="10" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Imagen</label>
                         <input type="file" class="form-control-file" name="img">
+                    </div>
                 </div>
-             </div>
-        </div>
-        <button type="submit" class="btn btn-primary"> Enviar </button>
-        </from>
+            </div>
+            <button type="submit" class="btn btn-primary"> Enviar </button>
+            </from>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
