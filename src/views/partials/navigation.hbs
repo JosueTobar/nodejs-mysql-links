@@ -6,21 +6,19 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
 
-    {{#if user}}
-    <li class="nav-item d-none d-sm-inline-block ">
-      <a href="/logout" class="nav-link">Cerrar</a>
-      <input type="text" value={{user.id}} id="txtIdUser" hidden> </input>
-    </li>
-    {{else}}
-    <li class="nav-item d-none d-sm-inline-block ">
-      <a href="/signin" class="nav-link">Login</a>
-    </li>
-    {{/if}}
+
   </ul>
   <!-- Right navbar links -->
-  {{#if user}}
+
   <ul class="navbar-nav ml-auto">
+    {{#if user}}
+    <a href="/logout" class="nav-link">Cerrar Secion</a>
+    <input type="text" value={{user.id}} id="txtIdUser" hidden> </input>
+    {{else}}
+    <a href="/signin" class="nav-link">Login</a>
+    {{/if}}
     <!-- Notifications Dropdown Menu -->
+    {{#if user}}
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <i class="far fa-bell"></i>
@@ -38,14 +36,15 @@
         <a href="#" class="dropdown-item dropdown-footer">...</a>
       </div>
     </li>
+    {{/if}}
   </ul>
-  {{/if}}
 </nav>
 <!-- /.navbar -->
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="/profile" class="brand-link">
-    <img src="http://localhost:4000/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="http://localhost:4000/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
     <span class="brand-text font-weight-light">Jovida</span>
   </a>
 
