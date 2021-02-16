@@ -5,12 +5,43 @@ CREATE DATABASE `inventario` ;
 USE `inventario` ;
 
 -- -----------------------------------------------------
+-- Table `inventario`.`roles`
+-- -----------------------------------------------------
+CREATE TABLE `inventario`.`roles` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `inventario`.`users`
+-- -----------------------------------------------------
+CREATE TABLE `inventario`.`users` (
+  `idUSUARIO` INT(11) NOT NULL AUTO_INCREMENT,
+  `fullname` VARCHAR(100) NULL DEFAULT NULL,
+  `username` VARCHAR(45) NULL DEFAULT NULL,
+  `password` VARCHAR(450) NULL DEFAULT NULL,
+  `Idroles` INT(11) NOT NULL,
+  PRIMARY KEY (`idUSUARIO`),
+  CONSTRAINT `fk_USUARIO_roles1`
+    FOREIGN KEY (`Idroles`)
+    REFERENCES `inventario`.`roles` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = latin1;
+-- -----------------------------------------------------
 -- Table `inventario`.`producto`
 -- -----------------------------------------------------
 CREATE TABLE `inventario`.`producto` (
   `idPRODUCTO` INT(11) NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(450) NULL DEFAULT NULL,
   `NOMBRE` VARCHAR(450) NULL DEFAULT NULL,
+  `IMG` VARCHAR(450) NULL DEFAULT NULL,
   `DESCRIPCION` TEXT NULL,
   `TIPOUNIDAD` VARCHAR(45) NULL,
   `STOKMINIMO` INT(11) NULL DEFAULT NULL,
@@ -64,43 +95,12 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `inventario`.`roles`
--- -----------------------------------------------------
-CREATE TABLE `inventario`.`roles` (
-  `ID` INT(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`ID`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `inventario`.`users`
--- -----------------------------------------------------
-CREATE TABLE `inventario`.`users` (
-  `idUSUARIO` INT(11) NOT NULL AUTO_INCREMENT,
-  `fullname` VARCHAR(100) NULL DEFAULT NULL,
-  `username` VARCHAR(45) NULL DEFAULT NULL,
-  `password` VARCHAR(450) NULL DEFAULT NULL,
-  `Idroles` INT(11) NOT NULL,
-  PRIMARY KEY (`idUSUARIO`),
-  CONSTRAINT `fk_USUARIO_roles1`
-    FOREIGN KEY (`Idroles`)
-    REFERENCES `inventario`.`roles` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
 -- Table `inventario`.`historica`
 -- -----------------------------------------------------
 CREATE TABLE `inventario`.`historica` (
   `idHISTORIACA` INT(11) NOT NULL AUTO_INCREMENT,
   `TRANSACCION` VARCHAR(45) NULL DEFAULT NULL,
+  `IMG` VARCHAR(450) NULL DEFAULT NULL,
   `FCHTRANSACCION` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `TIPOUNIDAD` VARCHAR(45) NULL,
   `CANTIDAD` DECIMAL(11,2) NULL DEFAULT NULL,

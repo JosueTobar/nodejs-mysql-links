@@ -19,6 +19,10 @@ $(document).ready( function () {
                 "next": "Siguiente",
                 "previous": "Anterior"
             }
-        }
+        },
+        responsive: true,
+        "columnDefs": [
+            { "width": "18%", "targets": 0 }
+          ]
     });
 });
