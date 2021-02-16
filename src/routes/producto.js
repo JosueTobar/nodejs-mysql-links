@@ -22,14 +22,13 @@ router.get('/producto_edit', (req, res) => {
 
 router.post('/producto_add', async (req, res) => {
     const filepath = req.file.filename;
-    const image = await Jimp.read(req.file.path)
-    image.resize(50, 50) 
-    await image.writeAsync(`uploads/${filepath}`);
-    console.log(req.user);
     const { codigo, nombre, descripcion, tipounidad,minimo, pesoneto,pesobruto,cantidad } = req.body;
-    const result =  await pool.query('INSERT INTO `inventario`.`producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO`) VALUES (?,?,?,?,?,?,?,?); ', [codigo,nombre,descripcion, tipounidad ,minimo,pesoneto,pesobruto,req.user.idUSUARIO]);
-    await pool.query('INSERT INTO `inventario`.`historica` (`TRANSACCION`, `TIPOUNIDAD`, `CANTIDAD`, `NOMBRE`, `CODIGO`, `DESCRIPCION`, `ENTRADAS`, `SALIDAS`, `idPRODUCTO`, `idUSUARIO`) VALUES (?,?,?,?,?,?,?,?,?,?);',['ENTRADA',tipounidad,cantidad,nombre, codigo, descripcion,cantidad,0,result.insertId,req.user.idUSUARIO]);
-   
+    const result =  await pool.query('INSERT INTO `producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO`) VALUES (?,?,?,?,?,?,?,?); ', [codigo,nombre,descripcion, tipounidad ,minimo,pesoneto,pesobruto,req.user.idUSUARIO]);
+    var idproducto = result.insertId;
+    await pool.query('INSERT INTO `historica` (`TRANSACCION`, `TIPOUNIDAD`, `CANTIDAD`, `NOMBRE`, `CODIGO`, `DESCRIPCION`, `ENTRADAS`, `SALIDAS`, `idPRODUCTO`, `idUSUARIO`) VALUES (?,?,?,?,?,?,?,?,?,?);',['ENTRADA',tipounidad,cantidad,nombre, codigo, descripcion,cantidad,0,idproducto,req.user.idUSUARIO]);
+    
+    await pool.query('INSERT INTO `images` ( `TIPO`, `URL`, `idPRODUCTO`) VALUES (?,?, ?);    ',['PRODUCTO',req.file.filename,idproducto]);
+    
     req.flash('success', 'Producto Guardado');
     res.redirect('/producto_list');
 

@@ -129,8 +129,8 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `inventario`.`images`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`images` (
-  `idMAGES` INT(11) NOT NULL,
+CREATE Table `inventario`.`IMAGES` (
+  `idMAGES` INT(11) NOT NULL auto_increment,
   `TIPO` VARCHAR(45) NULL DEFAULT NULL,
   `URL` VARCHAR(45) NULL DEFAULT NULL,
   `idPRODUCTO` INT(11) NOT NULL,
@@ -216,5 +216,20 @@ INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('1', 'Administrador');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('2', 'Bodega General');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('3', 'Bodega de Accesorios');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('4', 'Inventario General');
+
+SELECT
+h.TRANSACCION,
+h.FCHTRANSACCION,
+h.TIPOUNIDAD,
+h.CANTIDAD,
+h.NOMBRE,
+h.CODIGO,
+h.DESCRIPCION,
+h.ENTRADAS,
+h.SALIDAS 
+FROM producto p, historica h, images i 
+where p.idPRODUCTO = h.idPRODUCTO 
+and p.idPRODUCTO = i.idPRODUCTO
+and p.idUSUARIO =1 ;
 
 
