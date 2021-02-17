@@ -1,0 +1,93 @@
+<!-- SELECT2 EXAMPLE -->
+<div class="card card-outline card-primary ">
+    <div class="card-header">
+        <h3 class="card-title"> Registrar Transaccion </h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form action="/producto_transaccion" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                 <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Tipo Transaccion</label>
+                        <select class="form-control select2" style="width: 100%;" name="tipounidad">
+                            <option value="ENTRADA" selected="selected">Entrada</option>
+                            <option value="SALIDA">Salida</option>
+                        </select>
+                    </div>
+                </div>
+            
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo"  >Nombre</label>
+                        <input type="text" class="form-control" name="nombre" value="{{producto.NOMBRE}}" disabled >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Codigo</label>
+                        <input type="text" class="form-control" name="codigo" value="{{producto.CODIGO}}" disabled >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Minimo</label>
+                        <input type="text" class="form-control" name="minimo" value="{{producto.STOKMINIMO}}" disabled  >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Entradas</label>
+                        <input type="text" class="form-control" value="{{producto.ENTRADAS}}" name="pesoneto" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Salidas</label>
+                        <input type="text" class="form-control" value="{{producto.SALIDAS}}"  name="pesobruto" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Existencias</label>
+                        <input type="text" class="form-control" value="{{producto.EXISTENCIA}}" name="pesobruto" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Unidad de Medida</label>
+                        <input type="text" class="form-control" value="{{producto.TIPOUNIDAD}}"  name="pesobruto" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="catidad">Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Destinatario</label>
+                        <input type="text" class="form-control" name="pesobruto">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Descripción </label>
+                        <textarea class="form-control" name="descripcion" id="" cols="10" rows="3"></textarea>
+                    </div>
+                </div>
+                
+            </div>
+                <button type="submit" class="btn btn-primary fa-pull-right"> Garudar </button>
+                <a href="/producto_list" class="btn btn-danger fa-pull-right mr-3" > Cancelar</a>
+            </from>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+
+    </div>
+</div>

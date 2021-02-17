@@ -7,6 +7,8 @@ h.CODIGO,
 h.TRANSACCION,
 CONCAT("<img src= '../uploads/'", p.IMG," class='producto-img'>'") AS `FOTO`,
 CONCAT(h.FCHTRANSACCION) AS FCHTRANSACCION,
+H.DESTINATARIO,
+U.FULLNAME USUARIO,
 h.TIPOUNIDAD,
 h.CANTIDAD,
 h.DESCRIPCION,
@@ -14,5 +16,6 @@ h.ENTRADAS,
 h.SALIDAS,
 h.ENTRADAS - h.SALIDAS EXISTENCIA,
 p.STOKMINIMO
- FROM historica h, producto p
- where p.idPRODUCTO = h.idPRODUCTO; 
+ FROM historica h, producto p, users u
+ where p.idPRODUCTO = h.idPRODUCTO 
+ and p.idUSUARIO =  u.idUSUARIO ; 

@@ -20,9 +20,6 @@ $(document).ready( function () {
                 "previous": "Anterior"
             }
         },
-        responsive: true,
-        "columnDefs": [
-            { "width": "18%", "targets": 0 }
-          ]
+        responsive: true
     });
 });
