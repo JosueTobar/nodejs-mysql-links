@@ -15,3 +15,11 @@ and u.idUSUARIO = 1
 https://dev.to/nahuelsegovia/subir-y-recortar-imagenes-con-expressjs-1pme
 https://blog.logrocket.com/image-processing-with-node-and-jimp/
 
+-----------------------------------------------------------------------------------------------------------
+                        Case para permisos de usuario 
+-----------------------------------------------------------------------------------------------------------
+
+https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
+
+https://code-maven.com/handlebars-conditionals
+
