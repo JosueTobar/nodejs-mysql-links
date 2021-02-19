@@ -1,21 +1,29 @@
 CREATE 
-VIEW `vHISTORICA` AS
-SELECT 
-h.idHISTORIACA,
-p.NOMBRE,
-h.CODIGO,
-h.TRANSACCION,
-CONCAT("<img src= '../uploads/'", p.IMG," class='producto-img'>'") AS `FOTO`,
-CONCAT(h.FCHTRANSACCION) AS FCHTRANSACCION,
-H.DESTINATARIO,
-U.FULLNAME USUARIO,
-h.TIPOUNIDAD,
-h.CANTIDAD,
-h.DESCRIPCION,
-h.ENTRADAS,
-h.SALIDAS,
-h.ENTRADAS - h.SALIDAS EXISTENCIA,
-p.STOKMINIMO
- FROM historica h, producto p, users u
- where p.idPRODUCTO = h.idPRODUCTO 
- and p.idUSUARIO =  u.idUSUARIO ; 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `vhistorica` AS
+    SELECT 
+        `h`.`idHISTORIACA` AS `idHISTORIACA`,
+        `u`.`idUSUARIO` AS `IDUSUARIO`,
+        `p`.`NOMBRE` AS `NOMBRE`,
+        `p`.`CODIGO` AS `CODIGO`,
+        `h`.`TRANSACCION` AS `TRANSACCION`,
+		CONCAT('../uploads/', `p`.`IMG`) AS `FOTO`,
+        CONCAT(`h`.`FCHTRANSACCION`) AS `FCHTRANSACCION`,
+        `h`.`DESTINATARIO` AS `DESTINATARIO`,
+        `u`.`fullname` AS `USUARIO`,
+        `p`.`TIPOUNIDAD` AS `TIPOUNIDAD`,
+        `h`.`CANTIDAD` AS `CANTIDAD`,
+        `h`.`DESCRIPCION` AS `DESCRIPCION`,
+        `h`.`ENTRADAS` AS `ENTRADAS`,
+        `h`.`SALIDAS` AS `SALIDAS`,
+        `h`.`ENTRADAS` - `h`.`SALIDAS` AS `EXISTENCIA`,
+        `p`.`STOKMINIMO` AS `STOKMINIMO`
+    FROM
+        ((`historica` `h`
+        JOIN `producto` `p`)
+        JOIN `users` `u`)
+    WHERE
+        `p`.`idPRODUCTO` = `h`.`idPRODUCTO`
+            AND `p`.`IDUSUARIO` = `u`.`idUSUARIO`

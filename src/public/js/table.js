@@ -1,4 +1,21 @@
+var fechaHoy;
+
 $(document).ready( function () {
+// Configuracion de fecha 
+    var fecha = new Date(); //Fecha actual
+    var mes = fecha.getMonth() + 1; //obteniendo mes
+    var dia = fecha.getDate(); //obteniendo dia
+    var ano = fecha.getFullYear(); //obteniendo año
+    if (dia < 10)
+        dia = '0' + dia;
+    if (mes < 10)
+        mes = '0' + mes 
+    fechaHoy = ano +"-"+mes+"-"+dia;
+
+    $('#fchinicial').val(fechaHoy);
+    $('#fchfinal').val(fechaHoy);
+    
+//Configuraiones de tablas generales  
     $('#DataTable').DataTable({
         language: {
             "decimal": "",
@@ -23,3 +40,4 @@ $(document).ready( function () {
         responsive: true
     });
 });
+

@@ -15,7 +15,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4;
 
-
 -- -----------------------------------------------------
 -- Table `inventario`.`users`
 -- -----------------------------------------------------
@@ -29,11 +28,7 @@ CREATE TABLE `inventario`.`users` (
   CONSTRAINT `fk_USUARIO_roles1`
     FOREIGN KEY (`Idroles`)
     REFERENCES `inventario`.`roles` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = latin1;
+    );
 -- -----------------------------------------------------
 -- Table `inventario`.`producto`
 -- -----------------------------------------------------
@@ -52,9 +47,7 @@ CREATE TABLE `inventario`.`producto` (
   `IDUSUARIO` INT(11),
   PRIMARY KEY (`idPRODUCTO`), 
   constraint foreign key (IDUSUARIO) REFERENCES users (idUSUARIO)
-  )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+  );
 
 
 -- -----------------------------------------------------
@@ -64,9 +57,7 @@ CREATE TABLE `inventario`.`ubicacion` (
   `idUBICACION` INT(11) NOT NULL AUTO_INCREMENT,
   `TIPO` VARCHAR(45) NULL DEFAULT NULL,
   `DESCRIPCION` TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`idUBICACION`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+  PRIMARY KEY (`idUBICACION`));
 
 
 -- -----------------------------------------------------
@@ -82,16 +73,11 @@ CREATE TABLE `inventario`.`caja` (
   PRIMARY KEY (`idCAJA`),
   CONSTRAINT `fk_CAJA_PRODUCTO1`
     FOREIGN KEY (`idPRODUCTO`)
-    REFERENCES `inventario`.`producto` (`idPRODUCTO`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `inventario`.`producto` (`idPRODUCTO`),
   CONSTRAINT `fk_DETALLEU_UBICACION1`
     FOREIGN KEY (`idUBICACION`)
     REFERENCES `inventario`.`ubicacion` (`idUBICACION`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+	);
 
 
 -- -----------------------------------------------------
@@ -109,18 +95,12 @@ CREATE TABLE `inventario`.`historica` (
   `idPRODUCTO` INT(11) NOT NULL,
   `idUSUARIO` INT(11) NOT NULL,
   PRIMARY KEY (`idHISTORIACA`),
-  CONSTRAINT `fk_HISTORIACA_PRODUCTO1`
-    FOREIGN KEY (`idPRODUCTO`)
-    REFERENCES `inventario`.`producto` (`idPRODUCTO`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_HISTORIACA_PRODUCTO1` FOREIGN KEY (`idPRODUCTO`)
+    REFERENCES `inventario`.`producto` (`idPRODUCTO`),
   CONSTRAINT `fk_HISTORIACA_USUARIO1`
     FOREIGN KEY (`idUSUARIO`)
     REFERENCES `inventario`.`users` (`idUSUARIO`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+    );
 
 
 -- -----------------------------------------------------
@@ -135,10 +115,7 @@ CREATE Table `inventario`.`IMAGES` (
   CONSTRAINT `fk_DOCUMENTO_PRODUCTO1`
     FOREIGN KEY (`idPRODUCTO`)
     REFERENCES `inventario`.`producto` (`idPRODUCTO`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+    );
 
 
 -- -----------------------------------------------------
@@ -149,10 +126,7 @@ CREATE TABLE `inventario`.`menu` (
   `nombre` VARCHAR(100) NULL DEFAULT NULL,
   `estado` VARCHAR(1) NULL DEFAULT NULL,
   `logo` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 3
-DEFAULT CHARACTER SET = utf8mb4;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -167,13 +141,7 @@ CREATE TABLE `inventario`.`submenu` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_submenu_menu1`
     FOREIGN KEY (`idMenu`)
-    REFERENCES `inventario`.`menu` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4;
-
+    REFERENCES `inventario`.`menu` (`id`));
 
 -- -----------------------------------------------------
 -- Table `inventario`.`rol_menu`
@@ -190,12 +158,7 @@ CREATE TABLE `inventario`.`rol_menu` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_rol_menu_submenu1`
     FOREIGN KEY (`idsubmenu`)
-    REFERENCES `inventario`.`submenu` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4;
+    REFERENCES `inventario`.`submenu` (`id`));
 
 
 -- -----------------------------------------------------
@@ -205,28 +168,66 @@ CREATE TABLE `inventario`.`sessions` (
   `session_id` VARCHAR(128) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin' NOT NULL,
   `expires` INT(11) UNSIGNED NOT NULL,
   `data` MEDIUMTEXT CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin' NULL DEFAULT NULL,
-  PRIMARY KEY (`session_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+  PRIMARY KEY (`session_id`));
 
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('1', 'Administrador');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('2', 'Bodega General');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('3', 'Bodega de Accesorios');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('4', 'Inventario General');
 
-SELECT
-h.TRANSACCION,
-h.FCHTRANSACCION,
-h.TIPOUNIDAD,
-h.CANTIDAD,
-h.NOMBRE,
-h.CODIGO,
-h.DESCRIPCION,
-h.ENTRADAS,
-h.SALIDAS 
-FROM producto p, historica h, images i 
-where p.idPRODUCTO = h.idPRODUCTO 
-and p.idPRODUCTO = i.idPRODUCTO
-and p.idUSUARIO =1 ;
 
+
+-- -----------------------------------------------------
+-- Vista de producto
+-- -----------------------------------------------------
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `vproductos` AS
+    SELECT 
+        `p`.`idPRODUCTO` AS `idPRODUCTO`,
+        `p`.`IDUSUARIO` AS `IDUSUARIO`,
+        CONCAT('../uploads/', `p`.`IMG`) AS `IMG`,
+        `p`.`NOMBRE` AS `NOMBRE`,
+        `p`.`CODIGO` AS `CODIGO`,
+        `p`.`STOKMINIMO` AS `STOKMINIMO`,
+        `p`.`TIPOUNIDAD` AS `TIPOUNIDAD`,
+        `p`.`DESCRIPCION` AS `DESCRIPCION`,
+        SUM(`h`.`ENTRADAS`) AS `ENTRADAS`,
+        SUM(`h`.`SALIDAS`) AS `SALIDAS`,
+        SUM(`h`.`ENTRADAS`) - SUM(`h`.`SALIDAS`) AS `EXISTENCIA`
+    FROM
+        (`producto` `p`
+        JOIN `historica` `h`)
+    WHERE
+        `p`.`idPRODUCTO` = `h`.`idPRODUCTO`
+    GROUP BY `h`.`idPRODUCTO`
+
+
+-- -----------------------------------------------------
+-- Vista Historial
+-- -----------------------------------------------------
+CREATE 
+    VIEW `vHISTORICA` AS
+    SELECT 
+        h.idHISTORIACA,
+        p.NOMBRE,
+        p.CODIGO,
+        h.TRANSACCION,
+        CONCAT("<img src= '../uploads/'", p.IMG," class='producto-img'>'") AS `FOTO`,
+        CONCAT(h.FCHTRANSACCION) AS FCHTRANSACCION,
+        h.DESTINATARIO,
+        U.FULLNAME USUARIO,
+        p.TIPOUNIDAD,
+        h.CANTIDAD,
+        h.DESCRIPCION,
+        h.ENTRADAS,
+        h.SALIDAS,
+        h.ENTRADAS - h.SALIDAS EXISTENCIA,
+        p.STOKMINIMO
+    FROM historica h, producto p, users u
+    where p.idPRODUCTO = h.idPRODUCTO 
+    and p.idUSUARIO =  u.idUSUARIO ; 
 

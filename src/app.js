@@ -74,6 +74,7 @@ app.use(require('./routes/menu.routes'));
 app.use('/links', require('./routes/links.routes'));
 app.use(require('./routes/producto'));
 app.use(require('./routes/usuarios'));
+app.use(require('./routes/historial'));
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
