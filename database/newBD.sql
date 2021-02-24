@@ -37,6 +37,15 @@ CREATE TABLE `inventario`.`producto` (
   `CODIGO` VARCHAR(450) NULL DEFAULT NULL,
   `NOMBRE` VARCHAR(450) NULL DEFAULT NULL,
   `IMG` VARCHAR(450) NULL DEFAULT NULL,
+  `CALIDAD` VARCHAR(450) NULL DEFAULT NULL,
+  `COLOR` VARCHAR(450) NULL DEFAULT NULL,
+  `ORIGEN` VARCHAR(450) NULL DEFAULT NULL,
+  `TEXTURA` VARCHAR(450) NULL DEFAULT NULL,
+  `LOTE` VARCHAR(450) NULL DEFAULT NULL,
+  `COMENTARIOS` TEXT NULL,
+  `ESTADO` VARCHAR(45) NULL DEFAULT NULL,
+  `MARCA` VARCHAR(450) NULL DEFAULT NULL,
+  `EMPAQUE` VARCHAR(450) NULL DEFAULT NULL,
   `DESCRIPCION` TEXT NULL,
   `TIPOUNIDAD` VARCHAR(45) NULL,
   `STOKMINIMO` INT(11) NULL DEFAULT NULL,
@@ -48,17 +57,15 @@ CREATE TABLE `inventario`.`producto` (
   PRIMARY KEY (`idPRODUCTO`), 
   constraint foreign key (IDUSUARIO) REFERENCES users (idUSUARIO)
   );
-
-
 -- -----------------------------------------------------
 -- Table `inventario`.`ubicacion`
 -- -----------------------------------------------------
 CREATE TABLE `inventario`.`ubicacion` (
   `idUBICACION` INT(11) NOT NULL AUTO_INCREMENT,
   `TIPO` VARCHAR(45) NULL DEFAULT NULL,
+  `ESTADO` VARCHAR(45) NULL DEFAULT NULL,
   `DESCRIPCION` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`idUBICACION`));
-
 
 -- -----------------------------------------------------
 -- Table `inventario`.`caja`
@@ -127,7 +134,6 @@ CREATE TABLE `inventario`.`menu` (
   `estado` VARCHAR(1) NULL DEFAULT NULL,
   `logo` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`));
-
 
 -- -----------------------------------------------------
 -- Table `inventario`.`submenu`
@@ -203,31 +209,36 @@ VIEW `vproductos` AS
         JOIN `historica` `h`)
     WHERE
         `p`.`idPRODUCTO` = `h`.`idPRODUCTO`
-    GROUP BY `h`.`idPRODUCTO`
-
+    GROUP BY `h`.`idPRODUCTO`;
 
 -- -----------------------------------------------------
 -- Vista Historial
 -- -----------------------------------------------------
 CREATE 
-    VIEW `vHISTORICA` AS
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `inventario`.`vhistorica` AS
     SELECT 
-        h.idHISTORIACA,
-        p.NOMBRE,
-        p.CODIGO,
-        h.TRANSACCION,
-        CONCAT("<img src= '../uploads/'", p.IMG," class='producto-img'>'") AS `FOTO`,
-        CONCAT(h.FCHTRANSACCION) AS FCHTRANSACCION,
-        h.DESTINATARIO,
-        U.FULLNAME USUARIO,
-        p.TIPOUNIDAD,
-        h.CANTIDAD,
-        h.DESCRIPCION,
-        h.ENTRADAS,
-        h.SALIDAS,
-        h.ENTRADAS - h.SALIDAS EXISTENCIA,
-        p.STOKMINIMO
-    FROM historica h, producto p, users u
-    where p.idPRODUCTO = h.idPRODUCTO 
-    and p.idUSUARIO =  u.idUSUARIO ; 
-
+        `h`.`idHISTORIACA` AS `idHISTORIACA`,
+        `p`.`NOMBRE` AS `NOMBRE`,
+        `p`.`CODIGO` AS `CODIGO`,
+        `h`.`TRANSACCION` AS `TRANSACCION`,
+        CONCAT('../uploads/', `p`.`IMG`) AS `FOTO`,
+        CONCAT(`h`.`FCHTRANSACCION`) AS `FCHTRANSACCION`,
+        `h`.`DESTINATARIO` AS `DESTINATARIO`,
+        `u`.`fullname` AS `USUARIO`,
+        `p`.`TIPOUNIDAD` AS `TIPOUNIDAD`,
+        `h`.`CANTIDAD` AS `CANTIDAD`,
+        `h`.`DESCRIPCION` AS `DESCRIPCION`,
+        `h`.`ENTRADAS` AS `ENTRADAS`,
+        `h`.`SALIDAS` AS `SALIDAS`,
+        `h`.`ENTRADAS` - `h`.`SALIDAS` AS `EXISTENCIA`,
+        `p`.`STOKMINIMO` AS `STOKMINIMO`
+    FROM
+        ((`inventario`.`historica` `h`
+        JOIN `inventario`.`producto` `p`)
+        JOIN `inventario`.`users` `u`)
+    WHERE
+        `p`.`idPRODUCTO` = `h`.`idPRODUCTO`
+            AND `p`.`IDUSUARIO` = `u`.`idUSUARIO

@@ -37,7 +37,11 @@ $(document).ready( function () {
                 "previous": "Anterior"
             }
         },
-        responsive: true
+        responsive: true,
+        dom: 'Bfrtip',
+        buttons: [
+             'csv', 'excel', 'pdf', 'print'
+        ]
     });
 });
 

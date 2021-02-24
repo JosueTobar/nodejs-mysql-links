@@ -46,3 +46,17 @@ EMPAQUE
 
 USO? > COLORANTES 
 FACTURA? < QUIMINCOS 
+
+--------------------------------------------------------------
+agregar vista detalle de productos donde se refeje la distribucion de las entradas 
+(productos dentro de tarimas) y las tarimas en la que tiene productos 
+Agregar Tabla de Cajas con distintos pesos y ubicaiones y enlasarlos 
+con la tabla de historial de transaccionesGenerales 
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------

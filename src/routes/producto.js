@@ -4,18 +4,28 @@ const pool = require('../database');
 const Jimp = require('jimp');
 const { isLoggedIn } = require('../lib/auth');
 
-//Select menu 
-router.get('/producto_list', async (req, res) => {
-    const producto = await pool.query('SELECT * FROM vproductos where IDUSUARIO =?;',[req.user.idUSUARIO]);
-    res.render('producto/list', { producto });
-});
 //
 router.get('/producto_add',  (req, res) => {
     res.render('producto/add');
 });
 
-router.get('/producto_edit', (req, res) => {
-    res.render('producto/edit');
+
+router.get('/producto_edit/:id', async (req, res) => {
+    const { id } = req.params;
+    const producto = await pool.query('SELECT * FROM vproductos where idPRODUCTO = ?', [id]);
+    res.render('producto/edit', { producto: producto[0] }); 
+});
+
+router.get('/producto_list', async (req, res) => {
+    if(req.user.Idroles === 1 ){  //distincion entre usuario administrador y usuario estandar 
+        console.log('Ingresado con la mandera de los dioses ');
+        const producto = await pool.query('SELECT * FROM vproductos');
+        res.render('producto/list', { producto });
+    }
+    else{
+        const producto = await pool.query('SELECT * FROM vproductos where IDUSUARIO =?;',[req.user.idUSUARIO]);
+        res.render('producto/list', { producto });
+    }   
 });
 
 router.get('/producto_transaccion/:id', async (req, res) => {
@@ -24,8 +34,16 @@ router.get('/producto_transaccion/:id', async (req, res) => {
     res.render('producto/transaccion', { producto: producto[0] }); 
 });
 
+router.get('/producto_delete/:id', async (req, res) => {
+    const { id } = req.params;
+    const producto = await pool.query('SELECT * FROM vproductos where idPRODUCTO = ?', [id]);
+    res.render('producto/transaccion', { producto: producto[0] }); 
+});
+
+
 router.post('/producto_add', async (req, res) => {
     const filepath = req.file.filename;
+  
     const { codigo, nombre, descripcion, tipounidad,minimo, pesoneto,pesobruto,cantidad } = req.body;
     const result =  await pool.query('INSERT INTO `producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO`, `IMG`) VALUES (?,?,?,?,?,?,?,?,?); ', [codigo,nombre,descripcion, tipounidad ,minimo,pesoneto,pesobruto,req.user.idUSUARIO, req.file.filename]);
     var idproducto = result.insertId;

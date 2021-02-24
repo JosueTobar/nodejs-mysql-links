@@ -9,11 +9,11 @@
 
   </ul>
   <!-- Right navbar links -->
-
   <ul class="navbar-nav ml-auto">
     {{#if user}}
-    <a href="/logout" class="nav-link">Cerrar Secion</a>
-    <input type="text" value={{user.id}} id="txtIdUser" hidden> </input>
+    <a href="/logout" class="nav-link">Cerrar Sessión</a>
+    <input type="text" value="{{user.idUSUARIO}}" id="txtIdUser" hidden> </input>
+    <input type="text" hidden disabled value="{{user.Idroles}}" id="userRol">
     {{else}}
     <a href="/signin" class="nav-link">Login</a>
     {{/if}}
@@ -36,6 +36,7 @@
         <a href="#" class="dropdown-item dropdown-footer">...</a>
       </div>
     </li>
+   
     {{/if}}
   </ul>
 </nav>
@@ -53,10 +54,11 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         {{#if user}}
+     
         <!-- MODULO INVENTARIO GENERAL -->
-        <li class="nav-item has-treeview">
+        <li class="nav-item has-treeview" id="inventarioGeneral">
           <a href="#" class="nav-link"> <i class="fas fa-cogs mr-2"></i></i> </i>
-            <p>Invenatario General <i class="fas fa-angle-left right "></i> </p>
+            <p>Inventario General <i class="fas fa-angle-left right "></i> </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
@@ -73,7 +75,7 @@
         </li>
         <!-- FIN MODULO INVENTARIO GENERAL -->
         <!-- MODULO BODEGA GENERAL -->
-        <li class="nav-item has-treeview">
+        <li class="nav-item has-treeview" id="bodegaGeneral">
           <a href="#" class="nav-link"> <i class="fas fa-boxes mr-2"></i></i> </i>
             <p> Bodega General <i class="fas fa-angle-left right "></i> </p>
           </a>
@@ -104,7 +106,7 @@
         </li>
         <!-- FIN MODULO BODEGA GENERAL -->
         <!-- MODULO BODEGA DE ACCESORIOS -->
-        <li class="nav-item has-treeview">
+        <li class="nav-item has-treeview" id="bodegaAccesorios">
           <a href="#" class="nav-link"> <i class="fas fa-tools mr-2"></i></i> </i>
             <p> Accesorios <i class="fas fa-angle-left right "></i> </p>
           </a>
@@ -120,7 +122,7 @@
         </li>
         <!--FIN  MODULO BODEGA DE ACCESORIOS -->
         <!-- MODULO USUARIOS GENERAL -->
-        <li class="nav-item has-treeview">
+        <li class="nav-item has-treeview" id="moduloUsuarios">
           <a href="#" class="nav-link"> <i class="fas fa-users mr-2"></i></i> </i>
             <p> Usuarios <i class="fas fa-angle-left right "></i> </p>
           </a>
