@@ -22,7 +22,7 @@ router.post('/busqueda_historial_general', async (req, res) => {
     const { tipofiltro, filtro, fchinicial,fchfinal  } = req.body;
     if(req.user.Idroles === 1 ){  //distincion entre usuario administrador y usuario estandar 
         if(tipofiltro === 'TODOS'){
-            const data = await pool.query( "SELECT * FROM inventario.vhistorica where IDUSUARIO =? and fchtransaccion BETWEEN ? AND ?;",[req.user.idUSUARIO, fchinicial , fchfinal ]);
+            const data = await pool.query( "SELECT * FROM inventario.vhistorica where  fchtransaccion BETWEEN ? AND ?;",[fchinicial , fchfinal ]);
             res.render('historial/general_list', { data });
        
         }else if (tipofiltro === 'ENTRADA'){
