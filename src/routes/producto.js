@@ -9,11 +9,17 @@ router.get('/producto_add',  (req, res) => {
     res.render('producto/add');
 });
 
-
 router.get('/producto_edit/:id', async (req, res) => {
     const { id } = req.params;
     const producto = await pool.query('SELECT * FROM vproductos where idPRODUCTO = ?', [id]);
     res.render('producto/edit', { producto: producto[0] }); 
+});
+
+router.post('/producto_Update/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion, tipounidad, minimo, pesoneto,pesobruto } = req.body;
+    const producto = await pool.query("UPDATE `inventario`.`producto` SET `NOMBRE` = ?, `IMG` = ?, `DESCRIPCION` = ?, `TIPOUNIDAD` = ? , `STOKMINIMO` = ?, `PESONETO` = ?, `PESOBRUTO` = ? WHERE (`idPRODUCTO` = ?)" , [nombre, req.file.filename, descripcion, tipounidad, minimo, pesoneto,pesobruto, id]);
+    res.redirect('/producto_list');
 });
 
 router.get('/producto_list', async (req, res) => {

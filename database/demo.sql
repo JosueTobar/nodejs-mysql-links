@@ -96,7 +96,7 @@ ENGINE = InnoDB;
 
 USE `demo` ;
 -- INSERT MENU
-	INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('BODEGA GENERAL', 'A', 'logo');
+	INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('MATERIA PRIMA', 'A', 'logo');
 	INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('INVENTARIO GENERAL', 'A', 'LOGO');
     INSERT INTO `menu` (`nombre`, `estado`, `logo`) VALUES ('REPORTES', 'A', 'LOGO');
 

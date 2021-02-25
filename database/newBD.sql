@@ -177,7 +177,7 @@ CREATE TABLE `inventario`.`sessions` (
   PRIMARY KEY (`session_id`));
 
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('1', 'Administrador');
-INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('2', 'Bodega General');
+INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('2', 'Materia Prima');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('3', 'Bodega de Accesorios');
 INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('4', 'Inventario General');
 
@@ -218,13 +218,14 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `inventario`.`vhistorica` AS
+VIEW `vhistorica` AS
     SELECT 
         `h`.`idHISTORIACA` AS `idHISTORIACA`,
+        `u`.`idUSUARIO` AS `IDUSUARIO`,
         `p`.`NOMBRE` AS `NOMBRE`,
         `p`.`CODIGO` AS `CODIGO`,
         `h`.`TRANSACCION` AS `TRANSACCION`,
-        CONCAT('../uploads/', `p`.`IMG`) AS `FOTO`,
+		CONCAT('../uploads/', `p`.`IMG`) AS `FOTO`,
         CONCAT(`h`.`FCHTRANSACCION`) AS `FCHTRANSACCION`,
         `h`.`DESTINATARIO` AS `DESTINATARIO`,
         `u`.`fullname` AS `USUARIO`,
@@ -236,9 +237,9 @@ VIEW `inventario`.`vhistorica` AS
         `h`.`ENTRADAS` - `h`.`SALIDAS` AS `EXISTENCIA`,
         `p`.`STOKMINIMO` AS `STOKMINIMO`
     FROM
-        ((`inventario`.`historica` `h`
-        JOIN `inventario`.`producto` `p`)
-        JOIN `inventario`.`users` `u`)
+        ((`historica` `h`
+        JOIN `producto` `p`)
+        JOIN `users` `u`)
     WHERE
         `p`.`idPRODUCTO` = `h`.`idPRODUCTO`
-            AND `p`.`IDUSUARIO` = `u`.`idUSUARIO
+            AND `p`.`IDUSUARIO` = `u`.`idUSUARIO`;
