@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,72 +6,70 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Jovida | Inventario</title>
   <!-- DataTables -->
-  <link rel="stylesheet" href="http://192.168.1.35:4000/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="http://192.168.1.35:4000/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="http://192.168.1.35:4000/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="http://192.168.1.35:4000/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="http://192.168.1.35:4000/css/styles.css">
+  <link rel="stylesheet" href="http://localhost:4000/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/styles.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">
-<div class="wrapper">
- {{>navigation}}
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">  
-      </div><!-- /.container-fluid -->
+  <div class="wrapper">
+    {{>navigation}}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+          {{>message}}
+          {{{ body }}}
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
     </div>
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        {{>message}} 
-        {{{ body }}}
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="float-right d-none d-sm-inline">
+      </div>
+      <!-- Default to the left -->
+      <strong> <a href="https://adminlte.io"></a></strong>
+    </footer>
   </div>
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-    </div>
-    <!-- Default to the left -->
-    <strong> <a href="https://adminlte.io"></a></strong> 
-  </footer>
-</div>
-<!-- jQuery -->
-<script src="http://192.168.1.35:4000/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="http://192.168.1.35:4000/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="http://localhost:4000/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="http://localhost:4000/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables -->
-  <script src="http://192.168.1.35:4000/plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="http://192.168.1.35:4000/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-  <script src="http://192.168.1.35:4000/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="http://192.168.1.35:4000/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-  <script src="http://192.168.1.35:4000/js/table.js"></script>
+  <script src="http://localhost:4000/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="http://localhost:4000/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="http://localhost:4000/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="http://localhost:4000/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="http://localhost:4000/js/table.js"></script>
   <!-- date-range-picker -->
-  <script src="http://192.168.1.35:4000/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- AdminLTE App -->
-<script src="http://192.168.1.35:4000/dist/js/adminlte.min.js"></script>
-<script src="http://192.168.1.35:4000/js/permisos.js"></script>
-<!-- CDNS -->
-<script src="http://192.168.1.35:4000/js/jquery-3.5.1.js" ></script>
-<script src="http://192.168.1.35:4000/js/jquery.dataTables.min.js" ></script>
-<script src="http://192.168.1.35:4000/js/dataTables.buttons.min.js" ></script>
-<script src="http://192.168.1.35:4000/js/jszip.min.js" ></script>
-<script src="http://192.168.1.35:4000/js/pdfmake.min.js" ></script>
-<script src="http://192.168.1.35:4000/js/vfs_fonts.js" ></script>
-<script src="http://192.168.1.35:4000/js/buttons.html5.min.js" ></script>
-<script src="http://192.168.1.35:4000/js/buttons.print.min.js" ></script>
-
+  <script src="http://localhost:4000/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- AdminLTE App -->
+  <script src="http://localhost:4000/dist/js/adminlte.min.js"></script>
+  <script src="http://localhost:4000/js/permisos.js"></script>
+  <!-- CDNS -->
+  <script src="http://localhost:4000/js/jquery-3.5.1.js"></script>
+  <script src="http://localhost:4000/js/jquery.dataTables.min.js"></script>
+  <script src="http://localhost:4000/js/dataTables.buttons.min.js"></script>
+  <script src="http://localhost:4000/js/jszip.min.js"></script>
+  <script src="http://localhost:4000/js/pdfmake.min.js"></script>
+  <script src="http://localhost:4000/js/vfs_fonts.js"></script>
+  <script src="http://localhost:4000/js/buttons.html5.min.js"></script>
+  <script src="http://localhost:4000/js/buttons.print.min.js"></script>
 </body>
 <script>
 </script>
 </html>
-

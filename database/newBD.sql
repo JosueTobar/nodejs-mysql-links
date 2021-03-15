@@ -7,18 +7,34 @@ USE `inventario` ;
 -- -----------------------------------------------------
 -- Table `inventario`.`roles`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`roles` (
+CREATE TABLE `roles` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NOMBRE` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4;
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `inventario`.`modulo`
+-- -----------------------------------------------------
+CREATE TABLE `modulo` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `inventario`.`unidadmedida`
+-- -----------------------------------------------------
+CREATE TABLE `unidadmedida` (
+  `ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `inventario`.`users`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`users` (
+CREATE TABLE `users` (
   `idUSUARIO` INT(11) NOT NULL AUTO_INCREMENT,
   `fullname` VARCHAR(100) NULL DEFAULT NULL,
   `username` VARCHAR(45) NULL DEFAULT NULL,
@@ -32,7 +48,7 @@ CREATE TABLE `inventario`.`users` (
 -- -----------------------------------------------------
 -- Table `inventario`.`producto`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`producto` (
+CREATE TABLE `producto` (
   `idPRODUCTO` INT(11) NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(450) NULL DEFAULT NULL,
   `NOMBRE` VARCHAR(450) NULL DEFAULT NULL,
@@ -54,13 +70,16 @@ CREATE TABLE `inventario`.`producto` (
   `PESONETO` DECIMAL(11,2) NULL,
   `PESOBRUTO` DECIMAL(11,2) NULL,
   `IDUSUARIO` INT(11),
+  `IDMODULO` INT(11),
   PRIMARY KEY (`idPRODUCTO`), 
-  constraint foreign key (IDUSUARIO) REFERENCES users (idUSUARIO)
+  constraint foreign key (IDUSUARIO) REFERENCES users (idUSUARIO),
+  constraint foreign key (IDMODULO) REFERENCES modulo (id)
   );
+
 -- -----------------------------------------------------
 -- Table `inventario`.`ubicacion`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`ubicacion` (
+CREATE TABLE `ubicacion` (
   `idUBICACION` INT(11) NOT NULL AUTO_INCREMENT,
   `TIPO` VARCHAR(45) NULL DEFAULT NULL,
   `ESTADO` VARCHAR(45) NULL DEFAULT NULL,
@@ -70,10 +89,11 @@ CREATE TABLE `inventario`.`ubicacion` (
 -- -----------------------------------------------------
 -- Table `inventario`.`caja`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`caja` (
+CREATE TABLE `caja` (
   `idCAJA` INT(11) NOT NULL AUTO_INCREMENT,
   `PESONETO` DECIMAL(11,2) NULL DEFAULT NULL,
   `PESOBRUTO` DECIMAL(11,2) NULL DEFAULT NULL,
+  `TIPOUNIDAD` VARCHAR(45) NULL DEFAULT NULL,
   `CANTIDAD` VARCHAR(45) NULL DEFAULT NULL,
   `idPRODUCTO` INT(11) NOT NULL,
   `idUBICACION` INT(11) NOT NULL,
@@ -86,12 +106,13 @@ CREATE TABLE `inventario`.`caja` (
     REFERENCES `inventario`.`ubicacion` (`idUBICACION`)
 	);
 
-
 -- -----------------------------------------------------
 -- Table `inventario`.`historica`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`historica` (
+CREATE TABLE `historica` (
   `idHISTORIACA` INT(11) NOT NULL AUTO_INCREMENT,
+  `idPRODUCTO` INT(11) NOT NULL,
+  `idUSUARIO` INT(11) NOT NULL,
   `TRANSACCION` VARCHAR(45) NULL DEFAULT NULL,
   `FCHTRANSACCION` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `CANTIDAD` DECIMAL(11,2) NULL DEFAULT NULL,
@@ -99,8 +120,14 @@ CREATE TABLE `inventario`.`historica` (
   `DESCRIPCION` MEDIUMTEXT NULL DEFAULT NULL,
   `ENTRADAS` INT(11) NULL DEFAULT NULL,
   `SALIDAS` INT(11) NULL DEFAULT NULL,
-  `idPRODUCTO` INT(11) NOT NULL,
-  `idUSUARIO` INT(11) NOT NULL,
+  `COLOR` VARCHAR(450) NULL DEFAULT NULL,
+  `ORIGEN` VARCHAR(450) NULL DEFAULT NULL,
+  `TEXTURA` VARCHAR(450) NULL DEFAULT NULL,
+  `LOTE` VARCHAR(450) NULL DEFAULT NULL,
+  `COMENTARIOS` TEXT NULL,
+  `ESTADO` VARCHAR(45) NULL DEFAULT NULL,
+  `MARCA` VARCHAR(450) NULL DEFAULT NULL,
+  `EMPAQUE` VARCHAR(450) NULL DEFAULT NULL,
   PRIMARY KEY (`idHISTORIACA`),
   CONSTRAINT `fk_HISTORIACA_PRODUCTO1` FOREIGN KEY (`idPRODUCTO`)
     REFERENCES `inventario`.`producto` (`idPRODUCTO`),
@@ -113,7 +140,7 @@ CREATE TABLE `inventario`.`historica` (
 -- -----------------------------------------------------
 -- Table `inventario`.`images`
 -- -----------------------------------------------------
-CREATE Table `inventario`.`IMAGES` (
+CREATE Table `IMAGES` (
   `idMAGES` INT(11) NOT NULL auto_increment,
   `TIPO` VARCHAR(45) NULL DEFAULT NULL,
   `URL` VARCHAR(45) NULL DEFAULT NULL,
@@ -128,7 +155,7 @@ CREATE Table `inventario`.`IMAGES` (
 -- -----------------------------------------------------
 -- Table `inventario`.`menu`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`menu` (
+CREATE TABLE `menu` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NULL DEFAULT NULL,
   `estado` VARCHAR(1) NULL DEFAULT NULL,
@@ -138,7 +165,7 @@ CREATE TABLE `inventario`.`menu` (
 -- -----------------------------------------------------
 -- Table `inventario`.`submenu`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`submenu` (
+CREATE TABLE `submenu` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL DEFAULT NULL,
   `url` VARCHAR(45) NULL DEFAULT NULL,
@@ -152,7 +179,7 @@ CREATE TABLE `inventario`.`submenu` (
 -- -----------------------------------------------------
 -- Table `inventario`.`rol_menu`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`rol_menu` (
+CREATE TABLE `rol_menu` (
   `idrol_menu` INT(11) NOT NULL AUTO_INCREMENT,
   `Idroles` INT(11) NOT NULL,
   `idsubmenu` INT(11) NOT NULL,
@@ -166,31 +193,24 @@ CREATE TABLE `inventario`.`rol_menu` (
     FOREIGN KEY (`idsubmenu`)
     REFERENCES `inventario`.`submenu` (`id`));
 
-
 -- -----------------------------------------------------
 -- Table `inventario`.`sessions`
 -- -----------------------------------------------------
-CREATE TABLE `inventario`.`sessions` (
+CREATE TABLE `sessions` (
   `session_id` VARCHAR(128) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin' NOT NULL,
   `expires` INT(11) UNSIGNED NOT NULL,
   `data` MEDIUMTEXT CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_bin' NULL DEFAULT NULL,
   PRIMARY KEY (`session_id`));
 
-INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('1', 'Administrador');
-INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('2', 'Materia Prima');
-INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('3', 'Bodega de Accesorios');
-INSERT INTO `inventario`.`roles` (`ID`, `NOMBRE`) VALUES ('4', 'Inventario General');
-
-
+INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES ('1', 'Administrador');
+INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES ('2', 'Materia Prima');
+INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES ('3', 'Bodega de Accesorios');
+INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES ('4', 'Inventario General');
 
 -- -----------------------------------------------------
 -- Vista de producto
 -- -----------------------------------------------------
-
 CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
 VIEW `vproductos` AS
     SELECT 
         `p`.`idPRODUCTO` AS `idPRODUCTO`,
@@ -215,9 +235,6 @@ VIEW `vproductos` AS
 -- Vista Historial
 -- -----------------------------------------------------
 CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
-    SQL SECURITY DEFINER
 VIEW `vhistorica` AS
     SELECT 
         `h`.`idHISTORIACA` AS `idHISTORIACA`,
