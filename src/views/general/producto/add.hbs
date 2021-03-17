@@ -1,0 +1,86 @@
+<!-- SELECT2 EXAMPLE -->
+<div class="card card-outline card-primary ">
+    <div class="card-header">
+        <h3 class="card-title"> Agregar Producto</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form action="/producto_add" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Nombre</label>
+                        <input type="text" class="form-control" name="nombre">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Codigo</label>
+                        <input type="text" class="form-control" name="codigo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Minimo</label>
+                        <input type="text" class="form-control" name="minimo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Peso Neto</label>
+                        <input type="text" class="form-control" name="pesoneto">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Peso Bruto</label>
+                        <input type="text" class="form-control" name="pesobruto">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Tipo Unidad</label>
+                        <select class="form-control select2" style="width: 100%;" name="tipounidad">
+                            <option value="Unidades" selected="selected">Unidades</option>
+                            <option value="kilogramos">Kilogramos</option>
+                            <option value="Gramos">Gramos</option>
+                            <option value="Yardas">Yardas</option>
+                            <option value="Pares">Pares</option>
+                            <option value="Docenas">Docenas</option>
+                            <option value="Docenas de pares">Docenas de pares</option>
+                            <option value="Rollos">Rollos</option>
+                            <option value="Bolsas">Bolsas</option>
+                            <option value="Cajas">Cajas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="catidad">Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Descripción </label>
+                        <textarea class="form-control" name="descripcion" id="" cols="10" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="" for="minimo">Imagen</label>
+                        <input type="file" class="form-control-file" name="img" > 
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary"> Enviar </button>
+            </from>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+
+    </div>
+</div>

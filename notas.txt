@@ -61,4 +61,8 @@ JtAdmin tobar503
 JAdmin $#jovida2021
 Novus novus$2021
 ------------------------------------------------------------------------
+GIT 
 ------------------------------------------------------------------------
+
+Creara una rama apartir del origen
+git branch meteriaprima origin/master

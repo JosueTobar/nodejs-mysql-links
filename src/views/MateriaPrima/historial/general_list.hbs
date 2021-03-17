@@ -1,0 +1,139 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Busqueda</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/busqueda_historial_general" class="form mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="selFiltro" class="col-2 col-form-label">Tipo</label>
+                                <div class="col-10">
+                                    <select class="form-control select2" style="width: 100%;" name="tipofiltro"
+                                        id='selFiltro'>
+                                        <option value="TODOS" selected="selected">TODOS</option>
+                                        <option value="NOMBRE">NOMBRE PRODUCTO</option>
+                                        <option value="CODIGO">CODIGO PRODUCTO</option>
+                                        <option value="ENTRADA">ENTRADAS</option>
+                                        <option value="SALIDA">SALIDAS</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="example-date-input" class="col-2 col-form-label">Filtro</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" id="txtFiltro" name="filtro">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="example-date-input" class="col-2 col-form-label">Inicial</label>
+                                <div class="col-10">
+                                    <input class="form-control" id="fchinicial" name="fchinicial" type="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="example-date-input" class="col-2 col-form-label">Final</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="date" id="fchfinal" name="fchfinal">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary fa-pull-left mt-3" id="btbBuscar">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Tabla -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h3 class="card-title">Productos</h3>
+                            </div>
+                            <div class="col-md-2  ">
+                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="DataTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>FOTO</th>
+                                    <th>CODIGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>TRANSACCION</th>
+                                    <th>FCHTRANSACCION</th>
+                                    <th>CANTIDAD</th>
+                                    <th>TIPOUNIDAD</th>
+                                    <th>DESTINATARIO</th>
+                                    <th>USUARIO</th>
+                                    <th>DESCRIPCION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each data}}
+                                <tr>
+                                    <td> <img src="{{FOTO}}" width="50" height="50" alt=""> </td>
+                                    <td>{{CODIGO}}</td>
+                                    <td>{{NOMBRE}}</td>
+                                    <td>{{TRANSACCION}}</td>
+                                    <td>{{FCHTRANSACCION}}</td>
+                                    <td>{{CANTIDAD}}</td>
+                                    <td>{{TIPOUNIDAD}}</td>
+                                    <td>{{DESTINATARIO}}</td>
+                                    <td>{{USUARIO}}</td>
+                                    <td>{{DESCRIPCION}}</td>
+                                </tr>
+                                {{else}}
+                                {{/each}}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>FOTO</th>
+                                    <th>CODIGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>TRANSACCION</th>
+                                    <th>FCHTRANSACCION</th>
+                                    <th>CANTIDAD</th>
+                                    <th>TIPOUNIDAD</th>
+                                    <th>DESTINATARIO</th>
+                                    <th>USUARIO</th>
+                                    <th>DESCRIPCION</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
