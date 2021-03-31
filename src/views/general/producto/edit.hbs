@@ -33,7 +33,8 @@
                     <div class="form-group">
                         <label>Tipo Unidad</label>
                         <select class="form-control select2" style="width: 100%;" name="tipounidad">
-                            <option value="Unidades" selected="selected">Unidades</option>
+                            <option value="Unidades" >Unidades</option>
+                            <option value="{{producto.TIPOUNIDAD}}" selected="selected">{{producto.TIPOUNIDAD}}</option>
                             <option value="kilogramos">Kilogramos</option>
                             <option value="Gramos">Gramos</option>
                             <option value="Yardas">Yardas</option>
@@ -56,7 +57,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="" for="minimo">Imagen</label>
-                        <input type="file" class="form-control-file" name="img" required>
+                        <input type="file" class="form-control-file" name="img" >
                     </div>
                 </div>
             </div>

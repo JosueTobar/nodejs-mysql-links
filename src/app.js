@@ -75,6 +75,7 @@ app.use(require('./routes/producto'));
 app.use(require('./routes/usuarios'));
 app.use(require('./routes/historial'));
 app.use(require('./routes/accesorios.historial'));
+app.use(require('./routes/materiaprima.transaciones'));
 
 // Permite acceder a los arcchivos de manera publica 
 app.use(express.static(path.join(__dirname,'public'))); 
