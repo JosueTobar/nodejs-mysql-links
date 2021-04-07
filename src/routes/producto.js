@@ -22,6 +22,7 @@ router.get('/producto_list', async (req, res) => {
     }
     else {
         const producto = await pool.query('SELECT * FROM vproductos where IDUSUARIO =?;', [req.user.idUSUARIO]);
+        console.log(req.user);
         res.render('general/producto/list', { producto });
     }
 });
