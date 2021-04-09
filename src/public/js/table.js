@@ -37,10 +37,11 @@ $(document).ready( function () {
                 "previous": "Anterior"
             }
         },
+        pageLength: 25,
         responsive: true,
         dom: 'Bfrtip',
         buttons: [
-             'csv', 'excel', 'pdf', 'print'
+            'excel', 'print'
         ]
     });
 });

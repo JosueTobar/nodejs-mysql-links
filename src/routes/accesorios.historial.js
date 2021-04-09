@@ -54,6 +54,3 @@ router.delete('/bodega/delete/:id', (req,res) => {
     });
 });
 module.exports = router;
-
-
-module.exports = router;

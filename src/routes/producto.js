@@ -41,18 +41,19 @@ router.get('/producto_delete/:id', async (req, res) => {
 
 router.post('/producto_add', async (req, res) => {
     var idproducto = null;
-    const { codigo, nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, cantidad } = req.body;
+    const { codigo, nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, cantidad, color, origen } = req.body;
     try {
         //Evaluar si biene el archivo en la peticion. 
         if (req.file) {
             const filepath = req.file.filename;
-            const result = await pool.query('INSERT INTO `producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO`, `IMG`) VALUES (?,?,?,?,?,?,?,?,?); ', [codigo, nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, req.user.idUSUARIO, req.file.filename]);
+            console.log(req.body);
+            const result = await pool.query('INSERT INTO `producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO`, `IMG` , `COLOR` , `ORIGEN`) VALUES (?,?,?,?,?,?,?,?,?,?,?); ', [codigo, nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, req.user.idUSUARIO, req.file.filename, color, origen]);
             idproducto = result.insertId;
             await pool.query('INSERT INTO `historica` (`TRANSACCION`, `CANTIDAD`, `DESCRIPCION`, `ENTRADAS`, `SALIDAS`, `idPRODUCTO`, `idUSUARIO`) VALUES (?,?,?,?,?,?,?);', ['ENTRADA', cantidad, descripcion, cantidad, 0, idproducto, req.user.idUSUARIO]);
             req.flash('success', 'Producto Guardado');
             res.redirect('/producto_list');
         } else {//Sin Archivo
-            const result = await pool.query('INSERT INTO `producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO`) VALUES (?,?,?,?,?,?,?,?); ', [codigo, nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, req.user.idUSUARIO]);
+            const result = await pool.query('INSERT INTO `producto` (`CODIGO`, `NOMBRE`, `DESCRIPCION`, `TIPOUNIDAD`, `STOKMINIMO`, `PESONETO`, `PESOBRUTO`, `IDUSUARIO` , `COLOR` , `ORIGEN`) VALUES (?,?,?,?,?,?,?,?,?,?); ', [codigo, nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, req.user.idUSUARIO, color, origen]);
             idproducto = result.insertId;
             await pool.query('INSERT INTO `historica` (`TRANSACCION`, `CANTIDAD`, `DESCRIPCION`, `ENTRADAS`, `SALIDAS`, `idPRODUCTO`, `idUSUARIO`) VALUES (?,?,?,?,?,?,?);', ['ENTRADA', cantidad, descripcion, cantidad, 0, idproducto, req.user.idUSUARIO]);
             req.flash('success', 'Producto Guardado');
@@ -68,15 +69,15 @@ router.post('/producto_add', async (req, res) => {
 
 router.post('/producto_Update/:id', async (req, res) => {
     const { id } = req.params;
-    const { nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto } = req.body;
+    const { nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, color, origen } = req.body;
     try {
         //Evaluar si biene el archivo en la peticion. 
         if (req.file) {
             const filepath = req.file.filename;
-            const producto = await pool.query("UPDATE `inventario`.`producto` SET `NOMBRE` = ?, `IMG` = ?, `DESCRIPCION` = ?, `TIPOUNIDAD` = ? , `STOKMINIMO` = ?, `PESONETO` = ?, `PESOBRUTO` = ? WHERE (`idPRODUCTO` = ?)", [nombre, filepath, descripcion, tipounidad, minimo, pesoneto, pesobruto, id]);
+            const producto = await pool.query("UPDATE producto SET `NOMBRE` = ?, `IMG` = ?, `DESCRIPCION` = ?, `TIPOUNIDAD` = ? , `STOKMINIMO` = ?, `PESONETO` = ?, `PESOBRUTO` = ?, `COLOR` = ?, `ORIGEN` = ? WHERE (`idPRODUCTO` = ?)", [nombre, filepath, descripcion, tipounidad, minimo, pesoneto, pesobruto, color, origen, id]);
             res.redirect('/producto_list');
         } else {//Sin Archivo
-            const producto = await pool.query("UPDATE `inventario`.`producto` SET `NOMBRE` = ?, `DESCRIPCION` = ?, `TIPOUNIDAD` = ? , `STOKMINIMO` = ?, `PESONETO` = ?, `PESOBRUTO` = ? WHERE (`idPRODUCTO` = ?)", [nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, id]);
+            const producto = await pool.query("UPDATE producto SET `NOMBRE` = ?, `DESCRIPCION` = ?, `TIPOUNIDAD` = ? , `STOKMINIMO` = ?, `PESONETO` = ?, `PESOBRUTO` = ?,  `COLOR` = ?, `ORIGEN` = ? WHERE (`idPRODUCTO` = ?)", [nombre, descripcion, tipounidad, minimo, pesoneto, pesobruto, color, origen, id]);
             res.redirect('/producto_list');
         }
     }
