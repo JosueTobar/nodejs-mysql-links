@@ -1,17 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
-const multer = require('multer');             // *Subir imagenes 
-const { v4: uuidv4 } = require('uuid');       // *Generar ids unicos 
+const multer = require('multer');             // Subir imagenes 
+const { v4: uuidv4 } = require('uuid');       // Generar ids unicos 
 const path = require('path');
-const exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars'); // Motor de vistas 
 const session = require('express-session');
-const passport = require('passport');
+const passport = require('passport');     
 const flash = require('connect-flash');
-const MySQLStore = require('express-mysql-session')(session);
+const MySQLStore = require('express-mysql-session')(session); //Sesiones Almacenadas base de datos 
 const bodyParser = require('body-parser');
-const corss = require('corss');                // *Acceder a la api desde cualquier lugar
+const corss = require('corss');                // Acceder a la api desde cualquier lugar
 
-const { database, port } = require('./config');
+const { database, port } = require('./config'); 
 
 // Intializations
 const app = express();
@@ -75,6 +75,7 @@ app.use(require('./routes/producto'));
 app.use(require('./routes/usuarios'));
 app.use(require('./routes/historial'));
 app.use(require('./routes/accesorios.historial'));
+app.use(require('./routes/accesorios.producto'));
 app.use(require('./routes/materiaprima.transaciones'));
 
 // Permite acceder a los arcchivos de manera publica 
